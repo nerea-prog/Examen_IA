@@ -1,21 +1,18 @@
-🔁 Aquí tienes el mismo ejercicio repetido, listo para que lo vuelvas a hacer
-Ejercicio — Rellenar el código
-Rellena los huecos:
-import ________
-import ________
+# ============================================================
+# 🔁 EJERCICIO — /api/generate (Rellenar)
+# ============================================================
 
+import ________
+import ________
 
 url = "http://localhost:11434/________"
-
 
 data = {
     "model": "________",
     "prompt": "Explica brevemente qué es un modelo de lenguaje."
 }
 
-
 response = requests.________(url, json=________, stream=________)
-
 
 if response.status_code == ________:
     for line in response.________():
@@ -28,24 +25,40 @@ else:
 
 
 
-🧪 Ejercicio nuevo — Rellenar código (Embeddings)
-Rellena los huecos marcados con ________:
+# ============================================================
+# 🧪 EJERCICIO — Embeddings (Rellenar)
+# ============================================================
 
-
-
-
-
-
-
-
-🧪 Ejercicio de rellenar — /api/chat con streaming
-Rellena los huecos:
 import ________
 import ________
-
 
 url = "http://localhost:11434/________"
 
+payload = {
+    "model": "________",
+    "input": "________"
+}
+
+response = requests.________(url, json=payload)
+
+if response.status_code == ________:
+    info = response.________()
+    vector = info["________"][0]
+    print("Dimensión:", len(________))
+    print("Primeros valores:", ________[:5])
+else:
+    print("Error:", response.status_code, response.text)
+
+
+
+# ============================================================
+# 🧪 EJERCICIO — /api/chat con streaming (Rellenar)
+# ============================================================
+
+import ________
+import ________
+
+url = "http://localhost:11434/________"
 
 payload = {
     "model": "________",
@@ -55,9 +68,7 @@ payload = {
     "stream": ________
 }
 
-
 response = requests.________(url, json=payload, stream=________)
-
 
 if response.status_code == ________:
     for line in response.________():
@@ -70,22 +81,20 @@ else:
 
 
 
-🧪 1. Ejercicio /api/show — Obtener información del modelo
-Rellena los huecos:
-import ________
-import ________
+# ============================================================
+# 🧪 1. EJERCICIO — /api/show (Rellenar)
+# ============================================================
 
+import ________
+import ________
 
 url = "http://localhost:11434/________"
-
 
 payload = {
    "model": "________"
 }
 
-
 response = requests.________(url, json=payload)
-
 
 if response.status_code == 200:
    info = response.________()
@@ -96,21 +105,21 @@ else:
    print("Error:", response.status_code, response.text)
 
 
-🧪 2. Ejercicio /api/pull — Descargar un modelo
-import ________
-import ________
 
+# ============================================================
+# 🧪 2. EJERCICIO — /api/pull (Rellenar)
+# ============================================================
+
+import ________
+import ________
 
 url = "http://localhost:11434/________"
-
 
 payload = {
    "name": "________"
 }
 
-
 response = requests.________(url, json=payload, stream=True)
-
 
 if response.status_code == 200:
    for line in response.________():
@@ -122,24 +131,22 @@ else:
    print("Error:", response.status_code, response.text)
 
 
-🧪 3. Ejercicio /api/create — Crear un modelo desde un Modelfile
-Rellena los huecos:
-python
-import ________
-import ________
 
+# ============================================================
+# 🧪 3. EJERCICIO — /api/create (Rellenar)
+# ============================================================
+
+import ________
+import ________
 
 url = "http://localhost:11434/________"
-
 
 payload = {
    "name": "________",
    "modelfile": "FROM llama3.2\nSYSTEM Este modelo responde de forma educada."
 }
 
-
 response = requests.________(url, json=payload)
-
 
 if response.status_code == 200:
    print("Modelo creado correctamente.")
@@ -147,14 +154,15 @@ else:
    print("Error:", response.status_code, response.text)
 
 
-🧪 4. Ejercicio /api/generate — Parámetros avanzados
-Rellena los huecos:
-import ________
-import ________
 
+# ============================================================
+# 🧪 4. EJERCICIO — /api/generate avanzado (Rellenar)
+# ============================================================
+
+import ________
+import ________
 
 url = "http://localhost:11434/________"
-
 
 payload = {
    "model": "llama3.2",
@@ -167,9 +175,7 @@ payload = {
    "stream": True
 }
 
-
 response = requests.________(url, json=payload, stream=True)
-
 
 if response.status_code == 200:
    for line in response.________():
@@ -179,52 +185,60 @@ if response.status_code == 200:
            print(chunk["response"], end="", flush=True)
 else:
    print("Error:", response.status_code, response.text)
-LIBRERIA OLLAMA
 
-🟦 1. Ejercicio /api/show — RELLENAR
+
+
+# ============================================================
+# 📚 LIBRERÍA OLLAMA — EJERCICIOS PARA RELLENAR
+# ============================================================
+
+# ------------------------------
+# 🟦 1. ollama.show
+# ------------------------------
+
 import ________
 
-
 info = ollama.________("________")
-
 
 print("Modelo:", info["________"])
 print("Familia:", info["________"])
 print("Parámetros:", info["________"])
 
 
-🟩 2. Ejercicio /api/pull — RELLENAR
-
+# ------------------------------
+# 🟩 2. ollama.pull
+# ------------------------------
 
 import ________
-
 
 for chunk in ollama.________("________"):
    print(chunk.get("________", ""), end=" ")
 
 
-🟧 3. Ejercicio /api/create — RELLENAR
-import ________
+# ------------------------------
+# 🟧 3. ollama.create
+# ------------------------------
 
+import ________
 
 modelfile = """
 FROM ________
 SYSTEM ________
 """
 
-
 ollama.________(
    model="________",
    modelfile=________
 )
 
-
 print("Modelo creado correctamente.")
 
 
-🟥 4. Ejercicio /api/generate (avanzado) — RELLENAR
-import ________
+# ------------------------------
+# 🟥 4. ollama.generate avanzado
+# ------------------------------
 
+import ________
 
 stream = ollama.________(
    model="________",
@@ -237,14 +251,15 @@ stream = ollama.________(
    stream=________
 )
 
-
 for chunk in stream:
    print(chunk["________"], end="", flush=True)
 
 
-🟪 5. Ejercicio /api/chat — RELLENAR
-import ________
+# ------------------------------
+# 🟪 5. ollama.chat
+# ------------------------------
 
+import ________
 
 stream = ollama.________(
    model="________",
@@ -254,26 +269,22 @@ stream = ollama.________(
    stream=________
 )
 
-
 for chunk in stream:
    print(chunk["________"]["________"], end="", flush=True)
 
 
-🟨 6. Ejercicio /api/embed — RELLENAR
-import ________
+# ------------------------------
+# 🟨 6. ollama.embed
+# ------------------------------
 
+import ________
 
 res = ollama.________(
    model="________",
    input="Los modelos de lenguaje representan texto mediante vectores numéricos."
 )
 
-
 vector = res["________"][0]
-
 
 print("Dimensión del embedding:", len(________))
 print("Primeros valores:", ________[:5])
-
-
-
