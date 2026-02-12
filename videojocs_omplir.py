@@ -1,39 +1,37 @@
-from http.client import HTTPException
-
-import numpy as np
-import ollama
-from numpy.linalg import norm
+import ________
+import ________
+from numpy.linalg import ________
 
 
 
 
 # Mètode de càrrega de fitxer
 def carregar_faqs():
-   fitxer = "faqs.txt"
+   fitxer = "________"
    llista_faqs = []
 
 
    try:
-       with open(fitxer, "r", encoding="utf-8") as f:
+       with open(fitxer, "________", encoding="utf-8") as f:
            for linea in f:
-               linea = linea.strip()
+               linea = linea.________()
                if not linea:
                    continue
 
 
-               questio, resposta = linea.split(";", 1)
-               embedding = obtenir_embedding(questio)
+               questio, resposta = linea.split("________", 1)
+               embedding = obtenir_embedding(________)
                faq = {
                    "questio": questio,
                    "resposta": resposta,
-                   "embedding": embedding
+                   "embedding": ________
                }
 
 
-               llista_faqs.append(faq)
+               llista_faqs.append(________)
        return llista_faqs
    except Exception as e:
-       print(f"Error en carregar les FAQS: {e}")
+       print(f"Error en carregar les FAQS: {________}")
        return []
 
 
@@ -41,86 +39,86 @@ def carregar_faqs():
 
 # Mètode que compara preguntes i obté resposta
 def comparar_pregunta(pregunta_usuari, llista_faqs_amb_embeddings, llindar):
-   embedding_usuari = obtenir_embedding(pregunta_usuari)
-   if embedding_usuari is None:
+   embedding_usuari = obtenir_embedding(________)
+   if embedding_usuari is ________:
        return None
 
 
-   best_similarity = 0
-   best_match = None
+   best_similarity = ________
+   best_match = ________
 
 
    for faq in llista_faqs_amb_embeddings:
-       similarity = calcular_similaridad(embedding_usuari, faq["embedding"])
+       similarity = calcular_similaridad(________, faq["________"])
 
 
        if similarity > best_similarity:
            best_similarity = similarity
-           best_match = faq
+           best_match = ________
 
 
-   if best_similarity >= llindar:
+   if best_similarity >= ________:
        return {
-           "resposta": best_match["resposta"],
-           "similaritat": best_similarity,
-           "pregunta_coincident": best_match["questio"]
+           "resposta": best_match["________"],
+           "similaritat": ________,
+           "pregunta_coincident": best_match["________"]
        }
    else:
-       return None
+       return ________
 
 
 
 
 # Mètode d’obtenció de l’embedding
 def obtenir_embedding(text):
-   response = ollama.embed(model="nomic-embed-text", input=text)
-   return response["embeddings"][0]
+   response = ollama.________(model="________", input=________)
+   return response["________"][0]
 
 
 
 
 # Mètode del càlcul de la similaritat
 def calcular_similaridad(embedding1, embedding2):
-   A = np.array(embedding1)
-   B = np.array(embedding2)
-   cosine = np.dot(A, B) / (norm(A) * norm(B))
-   return cosine
+   A = np.array(________)
+   B = np.array(________)
+   cosine = np.dot(A, B) / (________(A) * ________(B))
+   return ________
 
 
 
 
 # Funció del xat
 def xat():
-   print("\n" + "=" * 50)
+   print("\n" + "=" * ________)
    print("       XAT AMB ASSISTENT")
-   print("=" * 50)
+   print("=" * ________)
    print("Escriu les teves preguntes.")
-   print("Escriu 'SORTIR' per tornar al menú principal.\n")
+   print("Escriu '________' per tornar al menú principal.\n")
 
 
    missatges = [
        {
-           "role": "system",
+           "role": "________",
            "content": "Ets un assistent d'atenció al client per una empresa de videojocs i tens que ajudar a l'usuari"
        }
    ]
 
 
    while True:
-       pregunta = input("Tu: ").strip()
+       pregunta = input("Tu: ").________()
 
 
        if not pregunta:
            continue
 
 
-       if pregunta.upper() == "SORTIR":
+       if pregunta.upper() == "________":
            print("Tornant al menu principal...")
            return
 
 
        missatges.append({
-           "role": "user",
+           "role": "________",
            "content": pregunta
        })
 
@@ -130,35 +128,35 @@ def xat():
 
 
            resposta = ""
-           for response in ollama.chat(
-                   model="llama3.2",
-                   messages=missatges,
-                   stream=True
+           for response in ollama.________(
+                   model="________",
+                   messages=________,
+                   stream=________
            ):
-               text = response["message"]["content"]
+               text = response["________"]["________"]
                print(text, end="", flush=True)
-               resposta += text
+               resposta += ________
            print("\n")
 
 
            missatges.append({
-               "role": "assistant",
+               "role": "________",
                "content": resposta
            })
        except Exception as e:
-           print(f"Error durant la comunicació amb l'assistent: {e}")
+           print(f"Error durant la comunicació amb l'assistent: {________}")
 
 
 
 
 # Menú de l’aplicació
 def mostrar_menu():
-   print("\n" + "=" * 50)
+   print("\n" + "=" * ________)
    print("       APLICACIÓ D'ATENCIÓ AL CLIENT")
    print("1. ________")
    print("2. ________")
    print("3. ________")
-   print("=" * 50)
+   print("=" * ________)
 
 
 
@@ -167,29 +165,29 @@ def mostrar_menu():
 def main():
    print("==== APLICACIÓ D'ATENCIÓ AL CLIENT ====")
    faqs = carregar_faqs()
-   print(f"Carregant {len(faqs)} preguntes freqüents")
+   print(f"Carregant {________} preguntes freqüents")
    while True:
        mostrar_menu()
        opcio = input("Selecciona una opció (1-3): ")
        if opcio == "1":
-           xat()
+           ________()
        elif opcio == "2":
            print("==== CONSULTA DE FAQS ====")
-           pregunta = input("Escriu la teva pregunta: ").strip()
+           pregunta = input("Escriu la teva pregunta: ").________()
            if not pregunta:
                print("No has introduit cap pregunta")
                continue
-           llindar = 0,65
-           resultat = comparar_pregunta(pregunta, faqs, llindar)
+           llindar = ________
+           resultat = comparar_pregunta(________, faqs, llindar)
            if resultat:
                print("Resposta trobada:")
-               print(f"Pregunta coincident: {resultat['pregunta_coincident']}")
-               print(f"Resposta: {resultat['resposta']}")
-               print(f"Similaritat: {resultat['similaritat']}")
+               print(f"Pregunta coincident: {resultat['________']}")
+               print(f"Resposta: {resultat['________']}")
+               print(f"Similaritat: {resultat['________']}")
            else:
                print("No s'ha trobat cap coincidència")
        elif opcio == "3":
-           print("Gracies per utilitzar l'aplicació")
+           print("________ per utilitzar l'aplicació")
            break
        else:
            print("Opció no valida. Si us plau, tria 1, 2 o 3.")
